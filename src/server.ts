@@ -9,6 +9,7 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl} from './util/util';
 
   // Set the network port
   const port = process.env.PORT || 8082;
+  const contextPath = "/image/v1";
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
@@ -30,7 +31,7 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
-  app.get( "/filteredimage", async ( req, res ) => {
+  app.get( contextPath + "/filteredimage", async ( req, res ) => {
     let { image_url } = req.query;
 
     if ( !image_url ) {
@@ -48,7 +49,7 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl} from './util/util';
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
-    res.send("try GET /filteredimage?image_url={{}}")
+    res.send(`try GET ${contextPath}/filteredimage?image_url={{}}`)
   } );
   
 
