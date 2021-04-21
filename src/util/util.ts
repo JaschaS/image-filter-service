@@ -21,7 +21,9 @@ export async function validateUrl(url: string): Promise<boolean> {
 export async function filterImageFromURL(inputURL: string): Promise<string>{
     return new Promise( async resolve => {
         const photo = await Jimp.read(inputURL);
+        
         const outpath = '/tmp/filtered.'+Math.floor(Math.random() * 2000)+'.jpg';
+
         await photo
         .resize(256, 256) // resize
         .quality(60) // set JPEG quality
@@ -30,6 +32,15 @@ export async function filterImageFromURL(inputURL: string): Promise<string>{
             resolve(__dirname+outpath);
         });
     });
+}
+
+// deleteLocalFile
+// helper function to delete a file on the local disk
+// useful to cleanup after tasks
+// INPUTS
+//    files: an absolute paths to a file
+export async function deleteLocalFile(file: string){
+    return deleteLocalFiles([file]);
 }
 
 // deleteLocalFiles
