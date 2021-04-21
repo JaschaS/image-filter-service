@@ -1,6 +1,16 @@
 import fs from 'fs';
 import Jimp = require('jimp');
 
+
+export async function validateUrl(url: string): Promise<boolean> {
+    try {
+        new URL(url);
+        return true;
+    } catch (_) {
+        return false;  
+    }
+} 
+
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
 // returns the absolute path to the local image

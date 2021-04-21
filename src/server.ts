@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import {filterImageFromURL, deleteLocalFiles, validateUrl} from './util/util';
 
 (async () => {
 
@@ -30,6 +30,20 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
+  app.get( "/filteredimage", async ( req, res ) => {
+    let { image_url } = req.query;
+
+    if ( !image_url ) {
+      return res.status(422).send("Query parameter 'image_url' is necessary");
+    }
+
+    let validUrl = await validateUrl(image_url)
+    if ( !validUrl ) {
+      return res.status(422).send("Query parameter is not a valid url")
+    }
+
+    res.status(200).send("Welcome to the Cloud!");
+  } );
   
   // Root Endpoint
   // Displays a simple message to the user
