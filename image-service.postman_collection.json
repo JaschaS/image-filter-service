@@ -183,6 +183,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body contains an image\", function () {",
+							"});",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Content-Type is 'image/jpg'\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('image/jpeg');",
 							"});"
 						],
 						"type": "text/javascript"
@@ -269,6 +277,31 @@
 					"body": "Welcome to the Cloud!"
 				}
 			]
+		},
+		{
+			"name": "criteria request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/image/v1/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"image",
+						"v1",
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
